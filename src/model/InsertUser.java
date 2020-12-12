@@ -13,14 +13,14 @@ public class InsertUser implements R{
 	public static final String USER_UNIVERSITY = "knumovie";
 	public static final String USER_PASSWD = "comp322";
 
-	public boolean idDuplicationCheck() {
+	public boolean idDuplicationCheck(String insert_id) {
 		Connection conn = null;
 		Statement stmt = null;
 		String sql = "";
 		
 		boolean duplicate_flag = false;
 		
-		String id = req.get("signUp_id").toString();
+		String id = insert_id;
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -62,7 +62,7 @@ public class InsertUser implements R{
 		return duplicate_flag;
 	}
 	
-	public boolean insert_user() {
+	public boolean insert_user(AccountDTO dto) {
 		Connection conn = null;
 		Statement stmt = null;
 
@@ -70,14 +70,14 @@ public class InsertUser implements R{
 		boolean success_flag = false;
 		
 		int row_id = 0;
-		String id = req.get("signUp_id").toString();
-		String pw = req.get("signUp_pw").toString();
-		String name = req.get("signUp_name").toString();
-		String contact = req.get("signUp_contact").toString();
-		String address = req.get("signUp_address").toString();
-		String sex = req.get("signUp_sex").toString();
-		String birth = req.get("signUp_birth").toString();
-		String job = req.get("signUp_job").toString();
+		String id = dto.getUsername();
+		String pw = dto.getPassword();
+		String name = dto.getName();
+		String contact = dto.getContact();
+		String address = dto.getAddress();
+		String sex = dto.getSex();
+		String birth = dto.getBirth();
+		String job = dto.getJob();
 
 		
 		try {

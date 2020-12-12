@@ -13,7 +13,7 @@ public class UserMainController implements R{
 			
 			AccountDAO dao = new AccountDAO();
 			
-			dao.getUserInfo();
+			//dao.getUserInfo();
 			
 			userMainMenu.show();
 

@@ -46,7 +46,7 @@ public class RateView implements View {
 
 			if (success_flag == true) {
 				RatingDAO dao = new RatingDAO();
-
+/*
 				if (dao.insertRate(rating, comments) == true) {
 					System.out.println("평가가 성공적으로 완료되었습니다.");
 					return true;
@@ -54,7 +54,7 @@ public class RateView implements View {
 					System.out.println("평가 저장에 실패했습니다.");
 					return false;
 				}
-
+*/
 			} else {
 				out.println("입력된 평점이 범위 내에 있지 않거나 후기가 100자 이상입니다.");
 				int num = choice();

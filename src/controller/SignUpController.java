@@ -15,6 +15,7 @@ public class SignUpController implements R {
 					break;
 				}
 			} else {
+				/*
 				if(!insertUser.idDuplicationCheck())
 				{
 					//out.println("중복 없음");
@@ -37,6 +38,7 @@ public class SignUpController implements R {
 						break;
 					}
 				}
+				*/
 				break;
 			}
 		}

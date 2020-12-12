@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="model.CheckUser, resource.R_class"%>
+<%@ page import="model.CheckUser, model.AccountDAO, model.AccountDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,13 +30,35 @@
 	}
 	
 	CheckUser check_user = new CheckUser();
-	R_class R = new R_class();
 	
 	if(check){
 		
 		String type;
 		if(check_user.Exist(id, pw)){
-			type = (String)R.get("user_type");
+			
+			//R.put("id",id);
+			//type = (String)R.get("user_type");
+			
+			AccountDAO dao = new AccountDAO();
+			AccountDTO dto = new AccountDTO();
+			
+			dto = dao.getUserInfo(id);
+			
+			type = dto.getType();
+			
+			session.setAttribute("id", dto.getId());
+			session.setAttribute("username", dto.getUsername());
+			session.setAttribute("pw", dto.getPassword());
+			session.setAttribute("name", dto.getName());
+			session.setAttribute("contact", dto.getContact());
+			session.setAttribute("type", dto.getType());
+			session.setAttribute("address", dto.getAddress());
+			session.setAttribute("sex", dto.getSex());
+			session.setAttribute("birth", dto.getBirth());
+			session.setAttribute("job", dto.getJob());
+			session.setAttribute("membership", dto.getMembership());
+			session.setAttribute("payment_date", dto.getPayment_date());
+			
 			if(type.equals("U")){
 				out.println("<script>");
 				out.println("alert('로그인 성공!');");

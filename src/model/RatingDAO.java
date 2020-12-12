@@ -146,14 +146,12 @@ public class RatingDAO implements R {
 		return list;
 	}
 	
-	public boolean insertRate(int rating, String comments) {
+	public boolean insertRate(int user_id, int movie_id, int rating, String comments) {
 
 		Connection con = null;
 		Statement stmt = null;
 		boolean success_flag = false;
 		
-		int movie_id = (int)req.get("selectnumOfMovie");
-		int user_id = (int)req.get("client_id");
 		
 		if(comments.replaceAll(" ", "").equals("")) {
 			comments = "null";

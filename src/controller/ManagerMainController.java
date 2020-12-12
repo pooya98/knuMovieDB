@@ -10,7 +10,7 @@ public class ManagerMainController implements R {
 			
 			AccountDAO dao = new AccountDAO();
 			
-			dao.getUserInfo();
+			//dao.getUserInfo();
 			managerMainMenu.show();
 
 			scan.nextLine();

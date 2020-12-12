@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<%@ page import="model.InsertUser, resource.R_class"%>
+<%@ page import="model.InsertUser, resource.R_class, model.AccountDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,7 +118,7 @@
 
 		InsertUser insert_user = new InsertUser();
 
-		if (insert_user.idDuplicationCheck() == true) {
+		if (insert_user.idDuplicationCheck(id) == true) {
 			out.println("<script>");
 			out.println("alert('이미 존재하는 아이디입니다.');");
 			out.println("history.back();");
@@ -137,10 +137,22 @@
 		RC.put("signUp_sex", sex);
 		RC.put("signUp_birth", birth);
 		RC.put("signUp_job", job);
+		
+		AccountDTO dto = new AccountDTO();
+		
+		dto.setUsername(id);
+		dto.setPassword(pw);
+		dto.setName(name);
+		dto.setContact(phone);
+		dto.setAddress(address);
+		dto.setSex(sex);
+		dto.setBirth(birth);
+		dto.setJob(job);
+		
 
 		InsertUser insert_user = new InsertUser();
 
-		if (insert_user.insert_user() == true) {
+		if (insert_user.insert_user(dto) == true) {
 			out.println("<script>");
 			out.println("alert('회원가입 완료!');");
 			out.println("location.href='../view/SignIn.jsp';");
