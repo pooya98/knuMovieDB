@@ -1,0 +1,132 @@
+package resource;
+
+import java.io.PrintStream;
+import java.util.Hashtable;
+import java.util.Scanner;
+
+import controller.DeleteContentsController;
+import controller.DeleteEpisodeController;
+import controller.DeleteMovieController;
+import controller.DeleteVersionController;
+import controller.DropMyAccountController;
+import controller.InitController;
+import controller.InsertContentsController;
+import controller.InsertEpisodeController;
+import controller.InsertMovieController;
+import controller.InsertVersionController;
+import controller.ManagerMainController;
+import controller.ModifyMyInfoController;
+import controller.ModifyMyPasswordController;
+import controller.MyPageController;
+import controller.RateController;
+import controller.SearchByTitleController;
+import controller.ShowAllMovieController;
+import controller.ShowAllReviewController;
+import controller.ShowMovieDetailController;
+import controller.ShowMyReviewController;
+import controller.SignInController;
+import controller.SignUpController;
+import controller.UpdateActorController;
+import controller.UpdateDirectorController;
+import controller.UserMainController;
+import model.CheckUser;
+import model.InsertUser;
+import view.DeleteContentsMenu;
+import view.DeleteEpisodeView;
+import view.DeleteMovieView;
+import view.DeleteVersionView;
+import view.DropMyAccountView;
+import view.InitMenu;
+import view.InsertContentsMenu;
+import view.InsertEpisodeView;
+import view.InsertMovieView;
+import view.InsertVersionView;
+import view.ManagerMainMenu;
+import view.ModifyMyInfoView;
+import view.ModifyMyPasswordView;
+import view.MyPageMenu;
+import view.RateView;
+import view.SearchByTitleResultView;
+import view.SearchByTitleView;
+import view.ShowAllMovieView;
+import view.ShowAllReviewView;
+import view.ShowMovieDetailView;
+import view.ShowMyInfoView;
+import view.ShowMyReviewView;
+import view.SignInFailView;
+import view.SignInView;
+import view.SignUpFailView;
+import view.SignUpView;
+import view.UpdateActorView;
+import view.UpdateDirectorView;
+import view.UserMainMenu;
+
+public interface R {
+
+	PrintStream out = System.out;
+	
+	Scanner scan = new Scanner(System.in);
+	
+	Hashtable<String, Object> request = new Hashtable<>();
+	Hashtable<String, Object> req = new Hashtable<>();
+	
+	InitMenu initmenu = new InitMenu();
+	SignInView signInView = new SignInView();
+	SignInFailView signInFailView = new SignInFailView();
+	SignUpView signUpView = new SignUpView();
+	SignUpFailView signUpFailView = new SignUpFailView();
+	UserMainMenu userMainMenu = new UserMainMenu();
+	ManagerMainMenu managerMainMenu = new ManagerMainMenu();
+	ShowAllMovieView showAllMovieView = new ShowAllMovieView();
+	SearchByTitleView searchByTitleView = new SearchByTitleView();
+	SearchByTitleResultView searchByTitleResultView = new SearchByTitleResultView();
+	MyPageMenu myPageMenu = new MyPageMenu();
+	ModifyMyInfoView modifyMyInfoView = new ModifyMyInfoView();
+	ShowMyInfoView showMyInfoView = new ShowMyInfoView();
+	ModifyMyPasswordView modifyMyPasswordView = new ModifyMyPasswordView();
+	DropMyAccountView dropMyAccountView = new DropMyAccountView();
+	ShowMyReviewView showMyReviewView = new ShowMyReviewView();
+	ShowMovieDetailView showMovieDetailView = new ShowMovieDetailView();
+	RateView rateView = new RateView();
+	ShowAllReviewView showAllReviewView = new ShowAllReviewView();
+	InsertMovieView insertMovieView = new InsertMovieView();
+	InsertContentsMenu insertContentsMenu = new InsertContentsMenu();
+	InsertEpisodeView insertEpisodeView = new InsertEpisodeView();
+	InsertVersionView insertVersionView = new InsertVersionView();
+	DeleteContentsMenu deleteContentsMenu = new DeleteContentsMenu();
+	DeleteMovieView deleteMovieView = new DeleteMovieView();
+	DeleteEpisodeView deleteEpisodeView = new DeleteEpisodeView();
+	DeleteVersionView deleteVersionView = new DeleteVersionView();
+	UpdateDirectorView updateDirectorView = new UpdateDirectorView();
+	UpdateActorView updateActorView = new UpdateActorView();
+	
+	InitController initController = new InitController();
+	SignInController signInController = new SignInController();
+	SignUpController signUpController = new SignUpController();
+	UserMainController userMainController = new UserMainController();
+	ManagerMainController managerMainController = new ManagerMainController();
+	ShowAllMovieController showAllMovieController = new ShowAllMovieController();
+	SearchByTitleController searchByTitleController = new SearchByTitleController();
+	MyPageController myPageController = new MyPageController();
+	ModifyMyInfoController modifyMyInfoController = new ModifyMyInfoController();
+	ModifyMyPasswordController modifyMyPasswordController = new ModifyMyPasswordController();
+	DropMyAccountController dropMyAccountController = new DropMyAccountController();
+	ShowMyReviewController showMyReviewController = new ShowMyReviewController();
+	ShowMovieDetailController showMovieDetailController = new ShowMovieDetailController();
+	RateController rateController = new RateController();
+	ShowAllReviewController showAllReviewController = new ShowAllReviewController();
+	InsertMovieController insertMovieController = new InsertMovieController();
+	InsertContentsController insertContentsController = new InsertContentsController();
+	InsertEpisodeController insertEpisodeController = new InsertEpisodeController();
+	InsertVersionController insertVersionController = new InsertVersionController();
+	DeleteContentsController deleteContentsController = new DeleteContentsController();
+	DeleteMovieController deleteMovieController = new DeleteMovieController();
+	DeleteEpisodeController deleteEpisodeController = new DeleteEpisodeController();
+	DeleteVersionController deleteVersionController = new DeleteVersionController();
+	UpdateDirectorController updateDirectorController = new UpdateDirectorController();
+	UpdateActorController updateActorController = new UpdateActorController();
+	
+	
+	CheckUser checkUser = new CheckUser();
+	InsertUser insertUser = new InsertUser();
+}
