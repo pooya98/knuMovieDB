@@ -18,7 +18,7 @@ public class MyPageController implements R {
 				break;
 
 			case 2:
-				modifyMyInfoController.process();
+				//modifyMyInfoController.process();
 				break;
 				
 			case 3:

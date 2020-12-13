@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="resource.R_class"%>
+<%@ page import="model.AccountDAO, model.AccountDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,14 +28,16 @@
 	
 	<br><br>
 <table border=\"1\">
-	<tr><td>마이페이지 홈</td>
+	<tr><td><a href="../view/Mypage.jsp">마이페이지 홈</a></td>
 	<td><a href="../view/ShowMyInfo.jsp">회원정보 조회</a></td>
     <td><a href="../view/ModifyMyInfo.jsp">회원정보 수정</a></td>
 	<td><a href="../view/ModifyPassword.jsp">비밀번호 수정</a></td>
-	<td><a href="../view/DropAccount.jsp">회원탈퇴</a></td>
-</table>	
-<%
-	out.println("<h3>"+username+" 님의 마이페이지 입니다."+"</h3>");
-%>
+	<td>회원탈퇴</td>
+</table>
+<br><br>
+<form method="post" action="../func/DropAccount.jsp">
+     <input type="submit" class="btn btn-primary form-control" value="회원탈퇴하기">
+</form>
+	
 </body>
 </html>

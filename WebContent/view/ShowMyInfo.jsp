@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="resource.R_class"%>
+<%@ page import="model.AccountDAO, model.AccountDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,14 +28,27 @@
 	
 	<br><br>
 <table border=\"1\">
-	<tr><td>마이페이지 홈</td>
-	<td><a href="../view/ShowMyInfo.jsp">회원정보 조회</a></td>
+	<tr><td><a href="../view/Mypage.jsp">마이페이지 홈</a></td>
+	<td>회원정보 조회</td>
     <td><a href="../view/ModifyMyInfo.jsp">회원정보 수정</a></td>
 	<td><a href="../view/ModifyPassword.jsp">비밀번호 수정</a></td>
 	<td><a href="../view/DropAccount.jsp">회원탈퇴</a></td>
-</table>	
+</table>
+
 <%
-	out.println("<h3>"+username+" 님의 마이페이지 입니다."+"</h3>");
-%>
+	AccountDAO dao = new AccountDAO();
+	AccountDTO dto = dao.getUserInfo(session.getAttribute("username").toString());
+	out.println("<br>사용자 고유번호 : "+dto.getId()+"<br>");
+	out.println("사용자 id : "+dto.getUsername()+"<br>");
+	out.println("사용자 이름 : "+dto.getName()+"<br>");
+	out.println("사용자 연락처 : "+dto.getContact()+"<br>");
+	out.println("사용자 주소 : "+dto.getAddress()+"<br>");
+	out.println("사용자 성별 : "+dto.getSex()+"<br>");
+	out.println("사용자 생년 월일 : "+dto.getBirth()+"<br>");
+	out.println("사용자 직업 : "+dto.getJob()+"<br>");
+	out.println("사용자 멤버쉽 : "+dto.getMembership()+"<br>");
+
+%>	
+	
 </body>
 </html>

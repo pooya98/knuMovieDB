@@ -15,7 +15,6 @@ import controller.InsertEpisodeController;
 import controller.InsertMovieController;
 import controller.InsertVersionController;
 import controller.ManagerMainController;
-import controller.ModifyMyInfoController;
 import controller.ModifyMyPasswordController;
 import controller.MyPageController;
 import controller.RateController;
@@ -108,7 +107,7 @@ public interface R {
 	ShowAllMovieController showAllMovieController = new ShowAllMovieController();
 	SearchByTitleController searchByTitleController = new SearchByTitleController();
 	MyPageController myPageController = new MyPageController();
-	ModifyMyInfoController modifyMyInfoController = new ModifyMyInfoController();
+	//ModifyMyInfoController modifyMyInfoController = new ModifyMyInfoController();
 	ModifyMyPasswordController modifyMyPasswordController = new ModifyMyPasswordController();
 	DropMyAccountController dropMyAccountController = new DropMyAccountController();
 	ShowMyReviewController showMyReviewController = new ShowMyReviewController();

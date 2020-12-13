@@ -98,7 +98,7 @@ public class AccountDAO implements R {
 						req.put("client_membership", rs.getString("MEMBERSHIP"));
 						dto.setMembership(rs.getString("MEMBERSHIP"));
 						req.put("client_payment_date", rs.getString("PAYMENT_DATE"));
-						dto.setMembership(rs.getString("PAYMENT_DATE"));
+						dto.setPayment_date((rs.getString("PAYMENT_DATE")));
 					}
 				}
 			}
@@ -158,7 +158,7 @@ public class AccountDAO implements R {
 		return success_flag;
 	}
 	
-	public boolean modify_info(String attribute, String value) {
+	public boolean modify_info(String username, String attribute, String value) {
 		Connection con = null;
 		Statement stmt = null;
 		boolean success_flag = false;
@@ -209,7 +209,7 @@ public class AccountDAO implements R {
 		return success_flag;
 	}
 	
-	public boolean dropAccount() {
+	public boolean dropAccount(String username) {
 		Connection con = null;
 		Statement stmt = null;
 		boolean success_flag = false;
@@ -234,7 +234,7 @@ public class AccountDAO implements R {
 			con.setAutoCommit(false);
 			stmt = con.createStatement();
 
-			String sql = "DELETE FROM ACCOUNT WHERE USERNAME = '"+req.get("id")+"'";
+			String sql = "DELETE FROM ACCOUNT WHERE USERNAME = '"+username+"'";
 
 			int r = stmt.executeUpdate(sql);
 			
