@@ -14,7 +14,83 @@ public class MovieDAO implements R {
 	public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	public static final String USER_UNIVERSITY = "knumovie";
 	public static final String USER_PASSWD = "comp322";
+	
+	public List<MovieDTO> getRecommend() {
 
+		List<MovieDTO> list = null;
+
+		Connection con = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			//System.out.println("Success!");
+		} catch (ClassNotFoundException e) {
+			System.err.println("error = " + e.getMessage());
+			System.exit(1);
+		}
+
+		try {
+			con = DriverManager.getConnection(URL, USER_UNIVERSITY, USER_PASSWD);
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			System.err.println("Cannot get a connection: " + ex.getMessage());
+			System.exit(1);
+		}
+
+		try {
+			con.setAutoCommit(false);
+			stmt = con.createStatement();
+
+			String sql = "SELECT M.ID AS MOVIE_ID, M.TITLE AS TITLE, M.TYPE AS TYPE, M.RUNTIME AS RUNTIME, M.START_DATE AS START_DATE, M.END_DATE AS END_DATE, G.NAME AS GENRE_NAME, RATING, RATEUSER, SUMOFRATING FROM MOVIE M, GENRE G WHERE M.GENRE_ID = G.ID ORDER BY M.SUMOFRATING DESC";
+			rs = stmt.executeQuery(sql);
+
+			if (rs != null) {
+				int count=0;
+				
+				list = new ArrayList<MovieDTO>();
+				while (rs.next()) {
+					if(++count == 10) {
+						break;
+					}
+					MovieDTO dto = new MovieDTO();
+					
+					dto.setId(rs.getInt("MOVIE_ID"));
+					dto.setTitle(rs.getString("TITLE"));
+					dto.setType(rs.getString("TYPE"));
+					dto.setRuntime(rs.getInt("RUNTIME"));
+					dto.setStart_date(rs.getString("START_DATE"));
+					dto.setEnd_date(rs.getString("END_DATE"));
+					dto.setGenre(rs.getString("GENRE_NAME"));
+					dto.setRating(rs.getDouble("RATING"));
+					dto.setRateUser(rs.getInt("RATEUSER"));
+					dto.setSumOfRating(rs.getDouble("SUMOFRATING"));
+					
+					double real_rating;
+					
+					if(rs.getInt("RATEUSER") == 0) {
+						real_rating = 0;
+					}
+					else {
+						real_rating = ((double)rs.getDouble("SUMOFRATING")/(double)rs.getInt("RATEUSER"));
+					}
+					dto.setRating(real_rating);
+					
+					list.add(dto);
+				}
+			}
+			con.close();
+			rs.close();
+			stmt.close();
+			
+		} catch (SQLException ex2) {
+			System.err.println("sql error = " + ex2.getLocalizedMessage());
+			System.exit(1);
+		}
+		return list;
+	}
+	
 	public List<MovieDTO> list_for_all() {
 
 		List<MovieDTO> list = null;

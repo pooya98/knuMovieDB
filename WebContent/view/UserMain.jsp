@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="resource.R_class"%>
+<%@ page import="resource.R_class, model.MovieDAO, model.MovieDTO, java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,5 +25,38 @@
 	<td><a href="../view/Mypage.jsp">마이페이지</a></td>
 	<td><a href="../func/LogOut.jsp">로그아웃</a></td></tr>
 </table>
+
+
+<h3>Movie 추천!</h3>
+<%
+	MovieDAO dao = new MovieDAO();
+	List<MovieDTO> list = dao.getRecommend();
+	
+	out.println("<table border=\"1\">");
+	out.println("<th>고유번호</th>");
+	out.println("<th>제목</th>");
+	out.println("<th>종류</th>");
+	out.println("<th>장르</th>");
+	out.println("<th>상영시간</th>");
+	out.println("<th>개봉일</th>");
+	out.println("<th>평점</th>");
+	out.println("<th>점수합</th>");
+	
+	for (MovieDTO dto : list) {
+		out.println("<tr>");
+		out.println("<td>"+dto.getId()+"</td>");
+		out.println("<td>"+"<a href=\"../view/ShowMovieDetail.jsp?id="+dto.getId()+"\">"+dto.getTitle()+"</a></td>");
+		out.println("<td>"+dto.getType()+"</td>");
+		out.println("<td>"+dto.getGenre()+"</td>");
+		out.println("<td>"+dto.getRuntime()+"</td>");
+		out.println("<td>"+dto.getStart_date().substring(0, 10)+"</td>");
+		out.println("<td>"+dto.getRating()+"</td>");
+		out.println("<td>"+dto.getSumOfRating()+"</td>");
+		out.println("</tr>");
+	}		
+	System.out.println("</table>");
+
+%>
+
 </body>
 </html>
