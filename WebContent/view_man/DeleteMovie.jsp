@@ -31,10 +31,10 @@
 	
 <br><br>
 <table border=\"1\">
-	<td><a href="../view_man/InsertContents.jsp">영상물 정보 등록 홈</a></td>
-    <td><a href="../view_man/InsertMovie.jsp">Movie 등록</a></td>
-	<td><a href="../view_man/InsertEpisode.jsp">Episode 등록</a></td>
-	<td><a href="../view_man/InsertVersion.jsp">Version 등록</a></td>
+	<td><a href="../view_man/DeleteContents.jsp">영상물 정보 삭제 홈</a></td>
+    <td><a href="../view_man/DeleteMovie.jsp">Movie 삭제</a></td>
+	<td><a href="../view_man/DeleteEpisode.jsp">Episode 삭제</a></td>
+	<td><a href="../view_man/DeleteVersion.jsp">Version 삭제</a></td>
 </table>
 
 <%
@@ -42,7 +42,7 @@
 	List<MovieDTO> list = dao.list_for_all();
 	
 	int count =0;
-	out.println("<h3>Episode를 등록할 TV Series를 선택하세요.</h3>");
+	out.println("<h3>삭제할 행의 오른쪽 '삭제'버튼을 누르세요</h3>");
 	
 
 	out.println("<table border=\"1\">");
@@ -53,22 +53,21 @@
 	out.println("<th>상영시간</th>");
 	out.println("<th>개봉일</th>");
 	out.println("<th>평점</th>");
+	out.println("<th>삭제</th>");
 	
 	for (MovieDTO dto : list) {
-		if(dto.getType().equals("TV Series")){
 			count++;
 			out.println("<tr>");
 			out.println("<td>"+dto.getId()+"</td>");
-			out.println("<td>"+"<a href=\"../view_man/InsertEpisodeDetail.jsp?movie_id="+dto.getId()+"\">"+dto.getTitle()+"</a></td>");
+			out.println("<td>"+dto.getTitle()+"</a></td>");
 			out.println("<td>"+dto.getType()+"</td>");
 			out.println("<td>"+dto.getGenre()+"</td>");
 			out.println("<td>"+dto.getRuntime()+"</td>");
 			out.println("<td>"+dto.getStart_date().substring(0, 10)+"</td>");
 			out.println("<td>"+dto.getRating()+"</td>");
+			out.println("<td>"+"<a href=\"../func/DeleteMovie.jsp?movie_id="+dto.getId()+"\">"+"삭제"+"</a></td>");
 			out.println("</tr>");
-		}
 	}
-	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
 	
 	if(count == 0) {
 		out.println("등록된 영상물 없음.");

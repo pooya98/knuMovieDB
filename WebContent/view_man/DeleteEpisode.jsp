@@ -31,10 +31,10 @@
 	
 <br><br>
 <table border=\"1\">
-	<td><a href="../view_man/InsertContents.jsp">영상물 정보 등록 홈</a></td>
-    <td><a href="../view_man/InsertMovie.jsp">Movie 등록</a></td>
-	<td><a href="../view_man/InsertEpisode.jsp">Episode 등록</a></td>
-	<td><a href="../view_man/InsertVersion.jsp">Version 등록</a></td>
+	<td><a href="../view_man/DeleteContents.jsp">영상물 정보 삭제 홈</a></td>
+    <td><a href="../view_man/DeleteMovie.jsp">Movie 삭제</a></td>
+	<td><a href="../view_man/DeleteEpisode.jsp">Episode 삭제</a></td>
+	<td><a href="../view_man/DeleteVersion.jsp">Version 삭제</a></td>
 </table>
 
 <%
@@ -42,7 +42,7 @@
 	List<MovieDTO> list = dao.list_for_all();
 	
 	int count =0;
-	out.println("<h3>Episode를 등록할 TV Series를 선택하세요.</h3>");
+	out.println("<h3>Episode를 삭제할 TV Series를 선택하세요.</h3>");
 	
 
 	out.println("<table border=\"1\">");
@@ -59,7 +59,7 @@
 			count++;
 			out.println("<tr>");
 			out.println("<td>"+dto.getId()+"</td>");
-			out.println("<td>"+"<a href=\"../view_man/InsertEpisodeDetail.jsp?movie_id="+dto.getId()+"\">"+dto.getTitle()+"</a></td>");
+			out.println("<td>"+"<a href=\"../view_man/DeleteEpisodeDetail.jsp?movie_id="+dto.getId()+"\">"+dto.getTitle()+"</a></td>");
 			out.println("<td>"+dto.getType()+"</td>");
 			out.println("<td>"+dto.getGenre()+"</td>");
 			out.println("<td>"+dto.getRuntime()+"</td>");

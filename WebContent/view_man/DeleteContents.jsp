@@ -31,10 +31,10 @@
 	
 <br><br>
 <table border=\"1\">
-	<td><a href="../view_man/InsertContents.jsp">영상물 정보 등록 홈</a></td>
-    <td><a href="../view_man/InsertMovie.jsp">Movie 등록</a></td>
-	<td><a href="../view_man/InsertEpisode.jsp">Episode 등록</a></td>
-	<td><a href="../view_man/InsertVersion.jsp">Version 등록</a></td>
+	<td><a href="../view_man/DeleteContents.jsp">영상물 정보 삭제 홈</a></td>
+    <td><a href="../view_man/DeleteMovie.jsp">Movie 삭제</a></td>
+	<td><a href="../view_man/DeleteEpisode.jsp">Episode 삭제</a></td>
+	<td><a href="../view_man/DeleteVersion.jsp">Version 삭제</a></td>
 </table>
 
 
