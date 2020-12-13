@@ -11,7 +11,7 @@ public class SearchByTitleController implements R {
 	String title;
 
 	public void process() {
-
+/*
 		while (true) {
 			searchByTitleView.show();
 
@@ -53,7 +53,7 @@ public class SearchByTitleController implements R {
 				}
 			}
 
-		}
+		}*/
 	}
 
 }

@@ -10,7 +10,7 @@ import resource.R;
 public class ShowMovieDetailController implements R {
 
 	public void process(String title) {
-		
+		/*
 		MovieDAO dao = new MovieDAO();
 		List<MovieDTO> list = dao.list_for_title_search(title);
 		
@@ -22,6 +22,6 @@ public class ShowMovieDetailController implements R {
 			if((boolean)request.get("rate_success")  == true) {
 				return;
 			}
-		}
+		}*/
 	}
 }

@@ -159,7 +159,7 @@ public class MovieDAO implements R {
 		return list;
 	}
 	
-	public List<MovieDTO> list_for_title_search(String title) {
+	public List<MovieDTO> list_for_title_search(int client_id, String title) {
 
 		List<MovieDTO> list = null;
 
@@ -189,7 +189,7 @@ public class MovieDAO implements R {
 
 			String sql = "SELECT M.ID AS MOVIE_ID, M.TITLE AS TITLE, M.TYPE AS TYPE, M.RUNTIME AS RUNTIME, M.START_DATE AS START_DATE, M.END_DATE AS END_DATE, G.NAME AS GENRE_NAME, M.RATING AS RATING, RATEUSER, SUMOFRATING "
 					+"FROM MOVIE M, GENRE G "
-					+"WHERE NOT EXISTS (SELECT * FROM RATING WHERE U_ID= "+req.get("client_id")+" AND M_ID = M.ID) AND "+"M.GENRE_ID = G.ID AND M.TITLE LIKE '%"+title+"%'";
+					+"WHERE NOT EXISTS (SELECT * FROM RATING WHERE U_ID= "+client_id+" AND M_ID = M.ID) AND "+"M.GENRE_ID = G.ID AND M.TITLE LIKE '%"+title+"%'";
 			rs = stmt.executeQuery(sql);
 
 			if (rs != null) {
@@ -207,6 +207,96 @@ public class MovieDAO implements R {
 					dto.setRating(rs.getDouble("RATING"));
 					dto.setRateUser(rs.getInt("RATEUSER"));
 					dto.setSumOfRating(rs.getDouble("SUMOFRATING"));
+					
+					double real_rating;
+					
+					if(rs.getInt("RATEUSER") == 0) {
+						real_rating = 0;
+					}
+					else {
+						real_rating = ((double)rs.getDouble("SUMOFRATING")/rs.getInt("RATEUSER"));
+					}
+					dto.setRating(real_rating);
+					
+					
+					list.add(dto);
+				}
+			}
+			
+			
+			con.close();
+			rs.close();
+			stmt.close();
+			
+		} catch (SQLException ex2) {
+			System.err.println("sql error = " + ex2.getLocalizedMessage());
+			System.exit(1);
+		}
+		return list;
+	}
+	
+	public List<MovieDTO> list_for_condition_search(int client_id, String type, String genre, String version) {
+
+		List<MovieDTO> list = null;
+
+		Connection con = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			//System.out.println("Success!");
+		} catch (ClassNotFoundException e) {
+			System.err.println("error = " + e.getMessage());
+			System.exit(1);
+		}
+
+		try {
+			con = DriverManager.getConnection(URL, USER_UNIVERSITY, USER_PASSWD);
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			System.err.println("Cannot get a connection: " + ex.getMessage());
+			System.exit(1);
+		}
+
+		try {
+			con.setAutoCommit(false);
+			stmt = con.createStatement();
+
+			String sql = "SELECT M.ID AS MOVIE_ID, M.TITLE AS TITLE, M.TYPE AS TYPE, M.RUNTIME AS RUNTIME, M.START_DATE AS START_DATE, M.END_DATE AS END_DATE, G.NAME AS GENRE_NAME, M.RATING AS RATING, RATEUSER, SUMOFRATING, V.V_TITLE AS V_TITLE, N.SHORT_NAME AS SHORT_NAME "
+					+"FROM MOVIE M, GENRE G, VERSION V, NATIONALITY N "
+					+"WHERE M.GENRE_ID = G.ID AND M.ID = V.M_ID AND V.N_ID = N.ID ";
+			
+			if(!type.equals("no")) {
+				sql = sql+"AND M.TYPE = '"+type+"' ";
+			}
+			if(!genre.equals("no")) {
+				sql = sql+"AND G.NAME = '"+genre+"' ";
+			}
+			if(!version.equals("no")) {
+				sql = sql+"AND N.SHORT_NAME = '"+version+"' ";
+			}
+			
+			
+			sql = sql+"AND NOT EXISTS (SELECT * FROM RATING R WHERE U_ID= "+client_id+" AND R.M_ID = M.ID) AND "+"M.GENRE_ID = G.ID";
+			rs = stmt.executeQuery(sql);
+
+			if (rs != null) {
+				list = new ArrayList<MovieDTO>();
+				while (rs.next()) {
+					MovieDTO dto = new MovieDTO();
+					
+					dto.setId(rs.getInt("MOVIE_ID"));
+					dto.setTitle(rs.getString("V_TITLE"));
+					dto.setType(rs.getString("TYPE"));
+					dto.setRuntime(rs.getInt("RUNTIME"));
+					dto.setStart_date(rs.getString("START_DATE"));
+					dto.setEnd_date(rs.getString("END_DATE"));
+					dto.setGenre(rs.getString("GENRE_NAME"));
+					dto.setRating(rs.getDouble("RATING"));
+					dto.setRateUser(rs.getInt("RATEUSER"));
+					dto.setSumOfRating(rs.getDouble("SUMOFRATING"));
+					dto.setVersion(rs.getString("SHORT_NAME"));
 					
 					double real_rating;
 					

@@ -12,11 +12,18 @@ public class MovieDTO {
 	private int rateUser;
 	private double sumOfRating;
 	private String director_name;
+	private String version;
 	
 	
 	
 	
 	
+	public String getVersion() {
+		return version;
+	}
+	public void setVersion(String version) {
+		this.version = version;
+	}
 	public String getDirector_name() {
 		return director_name;
 	}

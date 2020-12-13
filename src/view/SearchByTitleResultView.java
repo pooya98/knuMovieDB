@@ -31,7 +31,7 @@ public class SearchByTitleResultView implements R {
 	}
 
 	public void list(String title) {
-		
+		/*
 		MovieDAO dao = new MovieDAO();
 		List<MovieDTO> list = dao.list_for_title_search(title);
 		
@@ -95,7 +95,7 @@ public class SearchByTitleResultView implements R {
 			no = choice2();
 		}
 		
-		request.put("YesResultMenu_selectNo", no);
+		request.put("YesResultMenu_selectNo", no);*/
 	}
 
 }

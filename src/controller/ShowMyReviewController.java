@@ -11,9 +11,9 @@ public class ShowMyReviewController implements R {
 	public void process() {
 		
 		RatingDAO dao = new RatingDAO();
-		List<RatingDTO> list = dao.myList();
+		//List<RatingDTO> list = dao.myList();
 		
-		showMyReviewView.show2(list);
+		//showMyReviewView.show2(list);
 	}
 	
 	
