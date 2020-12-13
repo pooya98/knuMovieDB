@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>knuMovieDB</title>
+<title>knuMovie</title>
 </head>
 <body>
 <h1>knuMovieDB</h1>
@@ -29,14 +29,21 @@
 	<td><a href="../func/LogOut.jsp">로그아웃</a></td></tr>
 	</table>
 	
+<br><br>
+<table border=\"1\">
+	<td><a href="../view_man/InsertContents.jsp">영상물 등록 홈</a></td>
+    <td><a href="../view_man/InsertMovie.jsp">Movie 등록</a></td>
+	<td><a href="../view_man/InsertEpisode.jsp">Episode 등록</a></td>
+	<td><a href="../view_man/InsertVersion.jsp">Version 등록</a></td>
+</table>
+
 <%
 	MovieDAO dao = new MovieDAO();
-
 	List<MovieDTO> list = dao.list_for_all();
-
-	int count=0;
-
-	out.println("<h3>전체 영상물 리스트</h3>");
+	
+	int count =0;
+	out.println("<h3>Version를 등록할 Movie를 선택하세요.</h3>");
+	
 
 	out.println("<table border=\"1\">");
 	out.println("<th>고유번호</th>");
@@ -48,16 +55,16 @@
 	out.println("<th>평점</th>");
 	
 	for (MovieDTO dto : list) {
-		count++;
-		out.println("<tr>");
-		out.println("<td>"+dto.getId()+"</td>");
-		out.println("<td>"+"<a href=\"../view_man/ShowMovieDetail.jsp?id="+dto.getId()+"\">"+dto.getTitle()+"</a></td>");
-		out.println("<td>"+dto.getType()+"</td>");
-		out.println("<td>"+dto.getGenre()+"</td>");
-		out.println("<td>"+dto.getRuntime()+"</td>");
-		out.println("<td>"+dto.getStart_date().substring(0, 10)+"</td>");
-		out.println("<td>"+dto.getRating()+"</td>");
-		out.println("</tr>");
+			count++;
+			out.println("<tr>");
+			out.println("<td>"+dto.getId()+"</td>");
+			out.println("<td>"+"<a href=\"../view_man/InsertVersionDetail.jsp?movie_id="+dto.getId()+"\">"+dto.getTitle()+"</a></td>");
+			out.println("<td>"+dto.getType()+"</td>");
+			out.println("<td>"+dto.getGenre()+"</td>");
+			out.println("<td>"+dto.getRuntime()+"</td>");
+			out.println("<td>"+dto.getStart_date().substring(0, 10)+"</td>");
+			out.println("<td>"+dto.getRating()+"</td>");
+			out.println("</tr>");
 	}
 	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
 	
@@ -67,9 +74,7 @@
 	
 	System.out.println("</table>");
 %>
-	
-	
-	
-	
+
+
 </body>
 </html>

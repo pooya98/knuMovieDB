@@ -28,7 +28,7 @@ public class InsertMovieController implements R {
 	public void process() {
 		while (true) {
 			insertMovieView.show();
-
+/*
 			if ((boolean) request.get("movie_input") == true) {
 				MovieDAO dao = new MovieDAO();
 
@@ -76,7 +76,7 @@ public class InsertMovieController implements R {
 				if(num == 2) {
 					break;
 				}
-			}
+			}*/
 		}
 	}
 }

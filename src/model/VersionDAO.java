@@ -12,6 +12,53 @@ public class VersionDAO {
 	public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	public static final String USER_UNIVERSITY = "knumovie";
 	public static final String USER_PASSWD = "comp322";
+	
+	public boolean Exist(String movie_id, String version) {
+
+		boolean flag = false;
+
+		Connection con = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			//System.out.println("Success!");
+		} catch (ClassNotFoundException e) {
+			System.err.println("error = " + e.getMessage());
+			System.exit(1);
+		}
+
+		try {
+			con = DriverManager.getConnection(URL, USER_UNIVERSITY, USER_PASSWD);
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			System.err.println("Cannot get a connection: " + ex.getMessage());
+			System.exit(1);
+		}
+
+		try {
+			con.setAutoCommit(false);
+			stmt = con.createStatement();
+
+			String sql = "SELECT M.TITLE AS MOVIE_TITLE, V.V_TITLE AS VERSION_TITLE, N.SHORT_NAME AS SHORT_NAME, V.IS_ORIGINAL AS IS_ORIGINAL FROM MOVIE M, VERSION V, NATIONALITY N WHERE N.ID = V.N_ID AND M.ID = V.M_ID AND N.SHORT_NAME = '"+version+"' AND M.ID = "+movie_id;
+			rs = stmt.executeQuery(sql);
+
+			if (rs != null) {
+				while (rs.next()) {
+					flag = true;
+				}
+			}
+			con.close();
+			rs.close();
+			stmt.close();
+			
+		} catch (SQLException ex2) {
+			System.err.println("sql error = " + ex2.getLocalizedMessage());
+			System.exit(1);
+		}
+		return flag;
+	}
 
 	public List<VersionDTO> get_list(int id) {
 

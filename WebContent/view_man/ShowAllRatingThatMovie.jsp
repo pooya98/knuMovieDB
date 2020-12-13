@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="resource.R_class, model.MovieDAO, model.MovieDTO, java.util.List"%>
+<%@ page import="model.RatingDAO, model.RatingDTO, model.MovieDAO, model.MovieDTO, java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,11 +43,39 @@
 	out.println("장르 :"+dto.getGenre()+"<br>");
 	out.println("개봉일 :"+dto.getStart_date().substring(0,10)+"<br>");
 	out.println("재생시간 :"+dto.getRuntime()+"<br>");
-	out.println("평점 :"+dto.getRating()+"<br>");
-	out.println("평가 수 : "+dto.getRateUser()+"<br><br>");
+	out.println("평점 :"+dto.getRating()+"<br>"); 
+	out.println("평가 수 : "+dto.getRateUser()+"<br>");
+	
+	
+	RatingDAO dao_R = new RatingDAO();
+	List<RatingDTO> RatingList = dao_R.ListThatMovie(request.getParameter("id").toString());
+	
+	int count =0;
+	
+	out.println("<table border=\"1\">");
+	out.println("<th>ID</th>");
+	out.println("<th>평점</th>");
+	out.println("<th>코멘트</th>");
+	
+	for (RatingDTO dto2 : RatingList) {
+		count++;
+		out.println("<tr>");
+		out.println("<td>"+dto2.getAccount_username()+"</td>");
+		out.println("<td>"+dto2.getMy_rating()+"</td>");
+		out.println("<td>"+dto2.getMy_comments()+"</td>");
+		out.println("</tr>");
+	}
+	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
+	
+	if(count == 0) {
+		out.println("평가 없음.");
+	}
+	out.println("</table>");
+	
+	
 	
 %>
-
- <button onclick="history.back()">뒤로가기</button>
+<br>
+ <button onclick="history.back()">확인</button>
 </body>
 </html>

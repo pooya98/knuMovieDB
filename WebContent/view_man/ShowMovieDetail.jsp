@@ -20,11 +20,11 @@
     <td><a href="../view_man/ShowAllMovie.jsp">전체 영상물 조회</a></td>
 	<td><a href="../view_man/SearchMovieByTitle.jsp">제목으로 영상물 조회</a></td>
 	<td><a href="../view_man/SearchMovieByCondition.jsp">영상물 조건 검색</a></td>
-	<td><a href="../view_man/SearchMovieByCondition.jsp">전체 평가내역 조회</a></td>
-	<td><a href="../view_man/SearchMovieByCondition.jsp">영상물 정보 등록</a></td>
-	<td><a href="../view_man/SearchMovieByCondition.jsp">영상물 정보 삭제</a></td>
-	<td><a href="../view_man/SearchMovieByCondition.jsp">영상물 감독 정보 변경</a></td>
-	<td><a href="../view_man/SearchMovieByCondition.jsp">영상물 배우 정보 변경</a></td>
+	<td><a href="../view_man/ShowAllRating.jsp">전체 평가내역 조회</a></td>
+	<td><a href="../view_man/InsertContents.jsp">영상물 정보 등록</a></td>
+	<td><a href="../view_man/DeleteContents.jsp">영상물 정보 삭제</a></td>
+	<td><a href="../view_man/ModifyMovieDirectorInfo.jsp">영상물 감독 정보 변경</a></td>
+	<td><a href="../view_man/ModifyMovieActorInfo.jsp">영상물 배우 정보 변경</a></td>
 	<td><a href="../view_man/Mypage.jsp">마이페이지</a></td>
 	<td><a href="../func/LogOut.jsp">로그아웃</a></td></tr>
 	</table>

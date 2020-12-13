@@ -32,22 +32,44 @@
 <%
 	MovieDAO dao = new MovieDAO();
 
-	MovieDTO dto;
-	
-	dto = dao.detailInfo(Integer.parseInt(request.getParameter("id")));
+	List<MovieDTO> list = dao.list_for_all();
 
-	out.println("<h3>'"+dto.getTitle()+"' 상세조회</h3>");
+	int count=0;
+
+	out.println("<h3>평가내역을 조회할 영상물을 선택하세요.</h3>");
+
+	out.println("<table border=\"1\">");
+	out.println("<th>고유번호</th>");
+	out.println("<th>제목</th>");
+	out.println("<th>종류</th>");
+	out.println("<th>장르</th>");
+	out.println("<th>상영시간</th>");
+	out.println("<th>개봉일</th>");
+	out.println("<th>평점</th>");
 	
-	out.println("제목 :"+dto.getTitle()+"<br>");
-	out.println("종류 :"+dto.getType()+"<br>");
-	out.println("장르 :"+dto.getGenre()+"<br>");
-	out.println("개봉일 :"+dto.getStart_date().substring(0,10)+"<br>");
-	out.println("재생시간 :"+dto.getRuntime()+"<br>");
-	out.println("평점 :"+dto.getRating()+"<br>");
-	out.println("평가 수 : "+dto.getRateUser()+"<br><br>");
+	for (MovieDTO dto : list) {
+		count++;
+		out.println("<tr>");
+		out.println("<td>"+dto.getId()+"</td>");
+		out.println("<td>"+"<a href=\"../view_man/ShowAllRatingThatMovie.jsp?id="+dto.getId()+"\">"+dto.getTitle()+"</a></td>");
+		out.println("<td>"+dto.getType()+"</td>");
+		out.println("<td>"+dto.getGenre()+"</td>");
+		out.println("<td>"+dto.getRuntime()+"</td>");
+		out.println("<td>"+dto.getStart_date().substring(0, 10)+"</td>");
+		out.println("<td>"+dto.getRating()+"</td>");
+		out.println("</tr>");
+	}
+	System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
 	
+	if(count == 0) {
+		out.println("등록된 영상물 없음.");
+	}
+	
+	System.out.println("</table>");
 %>
-
- <button onclick="history.back()">뒤로가기</button>
+	
+	
+	
+	
 </body>
 </html>

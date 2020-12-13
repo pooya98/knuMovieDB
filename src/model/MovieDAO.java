@@ -614,7 +614,7 @@ public class MovieDAO implements R {
 		}
 	}
 	
-	public boolean insertMovie() {
+	public boolean insertMovie(String title, String type, int runtime, String genre, String start_date, String nationality) {
 		Connection conn = null;
 		Statement stmt = null;
 
@@ -624,13 +624,6 @@ public class MovieDAO implements R {
 		int row_id = 0;
 		int genre_id = 0;
 		int nationality_id = 0;
-		
-		String title = req.get("i_title").toString();
-		String type = req.get("i_type").toString();
-		int runtime = (int)req.get("i_runtime");
-		String genre = req.get("i_genre").toString();
-		String start_date = req.get("i_start_date").toString();
-		String nationality = req.get("i_original_version").toString();
 
 
 		

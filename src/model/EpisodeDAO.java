@@ -12,6 +12,54 @@ public class EpisodeDAO {
 	public static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	public static final String USER_UNIVERSITY = "knumovie";
 	public static final String USER_PASSWD = "comp322";
+	
+	public boolean Exist(String movie_id, String season_number, String episode_number) {
+
+		boolean flag = false;
+
+		Connection con = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			//System.out.println("Success!");
+		} catch (ClassNotFoundException e) {
+			System.err.println("error = " + e.getMessage());
+			System.exit(1);
+		}
+
+		try {
+			con = DriverManager.getConnection(URL, USER_UNIVERSITY, USER_PASSWD);
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			System.err.println("Cannot get a connection: " + ex.getMessage());
+			System.exit(1);
+		}
+
+		try {
+			con.setAutoCommit(false);
+			stmt = con.createStatement();
+
+			String sql = "SELECT M.TITLE AS TITLE, E.S_NUMBER AS SEASON, E.E_NUMBER AS EPINUM, E.E_RUNTIME AS E_RUNTIME, E.E_TITLE AS E_TITLE FROM EPISODE E, MOVIE M WHERE M.ID = E.M_ID AND M.ID ="+movie_id+" AND E.S_NUMBER = "+season_number+" AND E.E_NUMBER = "+episode_number+"ORDER BY E.S_NUMBER, E.E_NUMBER";
+			rs = stmt.executeQuery(sql);
+
+			if (rs != null) {
+				
+				while (rs.next()) {
+					flag = true;
+				}
+			}
+			con.close();
+			rs.close();
+			stmt.close();
+			
+		} catch (SQLException ex2) {
+			System.err.println("sql error = " + ex2.getLocalizedMessage());
+			System.exit(1);
+		}
+		return flag;
+	}
 
 	public List<EpisodeDTO> get_list(int id) {
 

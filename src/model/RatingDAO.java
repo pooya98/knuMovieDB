@@ -210,6 +210,72 @@ public class RatingDAO implements R {
 		return list;
 	}
 	
+	public List<RatingDTO> ListThatMovie(String movie_id) {
+
+		List<RatingDTO> list = null;
+
+		Connection con = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			//System.out.println("Success!");
+		} catch (ClassNotFoundException e) {
+			System.err.println("error = " + e.getMessage());
+			System.exit(1);
+		}
+
+		try {
+			con = DriverManager.getConnection(URL, USER_UNIVERSITY, USER_PASSWD);
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			System.err.println("Cannot get a connection: " + ex.getMessage());
+			System.exit(1);
+		}
+
+		try {
+			con.setAutoCommit(false);
+			stmt = con.createStatement();
+
+			String sql = "SELECT A.USERNAME AS USERNAME, M.ID AS MOVIE_ID, M.TITLE AS TITLE, M.TYPE AS TYPE, M.RUNTIME AS RUNTIME, M.START_DATE AS START_DATE, M.END_DATE AS END_DATE, M.RATING AS MOVIE_RATING"+
+						", R.RATING AS MY_RATING, R.COMMENTS AS COMMENTS, G.NAME AS GENRE, RATEUSER, SUMOFRATING FROM MOVIE M, RATING R, ACCOUNT A, GENRE G WHERE G.ID = M.GENRE_ID AND R.M_ID = M.ID AND R.U_ID = A.ID AND M.ID = "+movie_id+" ORDER BY A.ID, M.ID";
+			rs = stmt.executeQuery(sql);
+
+			if (rs != null) {
+				
+				list = new ArrayList<RatingDTO>();
+				while (rs.next()) {
+					RatingDTO dto = new RatingDTO();
+					
+					dto.setMovie_id((rs.getInt("MOVIE_ID")));
+					dto.setAccount_username((rs.getString("USERNAME")));
+					dto.setMovie_title((rs.getString("TITLE")));
+					dto.setMovie_type((rs.getString("TYPE")));
+					dto.setMovie_runtime(rs.getInt("RUNTIME"));
+					dto.setMovie_start_date((rs.getString("START_DATE")));
+					dto.setMovie_end_date((rs.getString("END_DATE")));
+					dto.setMovie_rating((rs.getDouble("MOVIE_RATING")));
+					dto.setMy_rating(rs.getDouble("MY_RATING"));
+					dto.setMovie_genre(rs.getString("GENRE"));
+					dto.setMy_comments(rs.getString("COMMENTS"));
+					
+					dto.setMovie_rating((double)rs.getDouble("SUMOFRATING")/(double)rs.getDouble("RATEUSER"));
+					
+					list.add(dto);
+				}
+			}
+			con.close();
+			rs.close();
+			stmt.close();
+			
+		} catch (SQLException ex2) {
+			System.err.println("sql error = " + ex2.getLocalizedMessage());
+			System.exit(1);
+		}
+		return list;
+	}
+	
 	public boolean insertRate(int user_id, int movie_id, int rating, String comments) {
 
 		Connection con = null;
