@@ -22,18 +22,18 @@
 	<td><a href="../view/SearchMovieByTitle.jsp">제목으로 영상물 조회</a></td>
 	<td><a href="../view/SearchMovieByCondition.jsp">영상물 조건 검색</a></td>
 	<td><a href="../view/ShowMyAllRating.jsp">나의 평가내역 조회</a></td>
-	<td>마이페이지</td>
+	<td><a href="../view/Mypage.jsp">마이페이지</a></td>
 	<td><a href="../func/LogOut.jsp">로그아웃</a></td></tr>
 </table>
 	
 	<br><br>
 <table border=\"1\">
-	<tr><td>마이페이지 홈</td>
+	<tr><td><a href="../view/Mypage.jsp">마이페이지 홈</a></td>
 	<td><a href="../view/ShowMyInfo.jsp">회원정보 조회</a></td>
     <td><a href="../view/ModifyMyInfo.jsp">회원정보 수정</a></td>
 	<td><a href="../view/ModifyPassword.jsp">비밀번호 수정</a></td>
 	<td><a href="../view/DropAccount.jsp">회원탈퇴</a></td>
-</table>	
+</table>
 <%
 	out.println("<h3>"+username+" 님의 마이페이지 입니다."+"</h3>");
 %>

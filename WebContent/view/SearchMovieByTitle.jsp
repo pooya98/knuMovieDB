@@ -18,12 +18,12 @@ String username = session.getAttribute("username").toString();
 <table border=\"1\">
 	<tr><td><a href="../view/UserMain.jsp">홈</a></td>
     <td><a href="../view/ShowAllMovie.jsp">전체 영상물 조회</a></td>
-	<td>제목으로 영상물 조회</td>
+	<td><a href="../view/SearchMovieByTitle.jsp">제목으로 영상물 조회</a></td>
 	<td><a href="../view/SearchMovieByCondition.jsp">영상물 조건 검색</a></td>
 	<td><a href="../view/ShowMyAllRating.jsp">나의 평가내역 조회</a></td>
 	<td><a href="../view/Mypage.jsp">마이페이지</a></td>
 	<td><a href="../func/LogOut.jsp">로그아웃</a></td></tr>
-	</table>
+</table>
 	
 <br><br>
 <form method="post" action="../view/SearchMovieByTitleResult.jsp">
