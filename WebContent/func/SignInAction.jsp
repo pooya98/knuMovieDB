@@ -68,7 +68,7 @@
 			else if(type.equals("M")){
 				out.println("<script>");
 				out.println("alert('로그인 성공!');");
-				out.println("location.href='../view/ManagerMain.jsp';");
+				out.println("location.href='../view_man/ManagerMain.jsp';");
 				out.println("</script>");
 			}
 			

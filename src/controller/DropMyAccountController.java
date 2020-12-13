@@ -9,7 +9,7 @@ public class DropMyAccountController implements R {
 		
 		if((boolean)request.get("drop") == true) {
 			AccountDAO dao = new AccountDAO();
-			
+			/*
 			if(dao.dropAccount() == true) {
 				out.println("È¸¿ø Å»Åð ¿Ï·á!");
 				out.println(" È®ÀÎ (Enter) > ");
@@ -19,7 +19,7 @@ public class DropMyAccountController implements R {
 				out.println("È¸¿ø Å»Åð ½ÇÆÐ!");
 				out.println(" È®ÀÎ (Enter) > ");
 				scan.nextLine();
-			}
+			}*/
 		}	
 	}
 }
