@@ -49,8 +49,9 @@
 	
 	
 %>
+<br>
 <button onclick="history.back()">»Æ¿Œ</button>
-	
+	<br><br>
 	
 	
 </body>
